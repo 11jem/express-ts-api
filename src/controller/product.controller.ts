@@ -1,4 +1,4 @@
-import { Request, Response, Next } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import {
   CreateProductInput,
   DeleteProductInput,
@@ -8,13 +8,50 @@ import {
 import {
   createProduct,
   deleteProduct,
+  getAllProducts,
+  getBudgetProducts,
   getProduct,
   updateProduct,
 } from '../service/product.service';
+import AppError from '../utils/error';
+
+export const getBestBudgetHandler = async (req: Request, res: Response) => {
+  const budgetProducts = await getBudgetProducts();
+  if (!budgetProducts) return res.sendStatus(404);
+
+  return res.send(budgetProducts);
+};
+
+export const getAllProductsHandler = async (req: Request, res: Response) => {
+  const allProducts = await getAllProducts();
+
+  return res.send(allProducts);
+};
+
+// trying error handling
+// export const getProductHandler = async (
+//   req: Request<GetProductInput['params'], {}>,
+//   res: Response,
+//   next: NextFunction
+// ) => {
+//   try {
+//     const { productId } = req.params;
+//     // const product = await getProduct({ productId });
+//     const product = await getProduct(next, { _id: 52893648796527834 });
+
+//     // if (!product) return res.sendStatus(404);
+//     if (!product) return next(new AppError('no product', 404));
+
+//     return res.send(product);
+//   } catch (err) {
+//     return next(err);
+//   }
+// };
 
 export const getProductHandler = async (
   req: Request<GetProductInput['params'], {}>,
-  res: Response
+  res: Response,
+  next: NextFunction
 ) => {
   const { productId } = req.params;
   const product = await getProduct({ productId });

@@ -18,7 +18,8 @@
     "typescript": "^4.5.5"
   },
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/app.ts"
+    "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
+    "build": "tsc"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",

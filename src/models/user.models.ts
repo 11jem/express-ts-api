@@ -2,11 +2,15 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import config from 'config';
 
-// type definition for userSchema
-export interface UserDocument extends mongoose.Document {
+// interface for user input to avoid using omit
+export interface UserInput {
   email: string;
   name: string;
   password: string;
+}
+
+// interface for userSchema
+export interface UserDocument extends UserInput, mongoose.Document {
   createdAt: Date;
   updatedAt: Date;
   comparePassword(candidatePassword: string): Promise<boolean>;

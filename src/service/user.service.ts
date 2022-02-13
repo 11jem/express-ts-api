@@ -1,14 +1,10 @@
 // Everything related to DB calls
 
-import { DocumentDefinition, FilterQuery } from 'mongoose';
+import { FilterQuery, QueryOptions, UpdateQuery } from 'mongoose';
 import { omit } from 'lodash';
-import User, { UserDocument } from '../models/user.models';
+import User, { UserDocument, UserInput } from '../models/user.models';
 
-export const createUser = async (
-  input: DocumentDefinition<
-    Omit<UserDocument, 'createdAt' | 'updatedAt' | 'comparePassword'>
-  >
-) => {
+export const createUser = async (input: UserInput) => {
   try {
     return await User.create(input);
   } catch (err: any) {
@@ -36,4 +32,27 @@ export const validatePassword = async ({
 
 export const findUser = async (query: FilterQuery<UserDocument>) => {
   return await User.findOne(query).lean();
+};
+
+export const updateUser = async (
+  query: FilterQuery<UserDocument>,
+  update: UpdateQuery<UserDocument>,
+  options: QueryOptions
+) => {
+  return await User.findOneAndUpdate(query, update, options);
+};
+
+export const updateUserPassword = async (
+  userId: string,
+  update: UpdateQuery<UserDocument>
+) => {
+  const user = await User.findById(userId);
+  if (!user) throw new Error('No user found');
+
+  user.password = update.password;
+  return await user.save();
+};
+
+export const deleteUser = async (query: FilterQuery<UserDocument>) => {
+  return await User.findByIdAndDelete(query);
 };

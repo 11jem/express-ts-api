@@ -4,13 +4,17 @@ import { UserDocument } from './user.models';
 
 const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyz0123456789', 10);
 
-// type definition for sessionSchema
-export interface ProductDocument extends mongoose.Document {
+// interface for product input
+export interface ProductInput {
   user: UserDocument['_id'];
   title: string;
   description: string;
   price: number;
   image: string;
+}
+
+// interace for productSchema
+export interface ProductDocument extends ProductInput, mongoose.Document {
   createdAt: Date;
   updatedAt: Date;
 }
