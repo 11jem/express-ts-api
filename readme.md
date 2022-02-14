@@ -9,3 +9,9 @@ This is a project to practice using express with typescript. The application tak
 - UPDATE user password
 - GET all products
 - Alias route (5 cheapest products)
+- JSON responses
+- Error handling
+
+## Error Handling
+
+Errors should be handled at the controller layer, service layer does not need to know about http.

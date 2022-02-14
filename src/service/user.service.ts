@@ -3,13 +3,11 @@
 import { FilterQuery, QueryOptions, UpdateQuery } from 'mongoose';
 import { omit } from 'lodash';
 import User, { UserDocument, UserInput } from '../models/user.models';
+import { NextFunction } from 'express';
+import AppError from '../utils/error';
 
 export const createUser = async (input: UserInput) => {
-  try {
-    return await User.create(input);
-  } catch (err: any) {
-    throw new Error(err);
-  }
+  return omit((await User.create(input)).toJSON(), 'password');
 };
 
 export const validatePassword = async ({
@@ -31,7 +29,9 @@ export const validatePassword = async ({
 };
 
 export const findUser = async (query: FilterQuery<UserDocument>) => {
-  return await User.findOne(query).lean();
+  const user = await User.findOne(query);
+
+  if (user) return omit(user.toJSON(), 'password');
 };
 
 export const updateUser = async (
@@ -39,7 +39,9 @@ export const updateUser = async (
   update: UpdateQuery<UserDocument>,
   options: QueryOptions
 ) => {
-  return await User.findOneAndUpdate(query, update, options);
+  const user = await User.findOneAndUpdate(query, update, options);
+
+  if (user) return omit(user.toJSON(), 'password');
 };
 
 export const updateUserPassword = async (
@@ -47,7 +49,8 @@ export const updateUserPassword = async (
   update: UpdateQuery<UserDocument>
 ) => {
   const user = await User.findById(userId);
-  if (!user) throw new Error('No user found');
+
+  if (!user) throw new AppError('No user found.', 404);
 
   user.password = update.password;
   return await user.save();

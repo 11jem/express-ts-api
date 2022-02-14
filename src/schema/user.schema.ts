@@ -32,6 +32,42 @@ export const getUserSchema = object({
   ...params,
 });
 
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *    CreateUserInput:
+ *      type: object
+ *      required:
+ *        - email
+ *        - name
+ *        - password
+ *        - passwordConfirm
+ *      properties:
+ *        email:
+ *          type: string
+ *          default: jennie@example.com
+ *        name:
+ *          type: string
+ *          default: Jennie Kim
+ *        password:
+ *          type: string
+ *          default: password123
+ *        passwordConfirm:
+ *          type: string
+ *          default: password123
+ *    CreateUserResponse:
+ *      type: object
+ *      properties:
+ *        email:
+ *          type: string
+ *        _id:
+ *          type: string
+ *        createdAt:
+ *          type: string
+ *        updatedAt:
+ *          type: string
+ */
 export const createUserSchema = object({
   ...payload,
 });

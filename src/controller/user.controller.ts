@@ -1,6 +1,4 @@
-import { Request, Response } from 'express';
-import { omit } from 'lodash';
-import logger from '../utils/logger';
+import { NextFunction, Request, Response } from 'express';
 import {
   createUser,
   deleteUser,
@@ -15,55 +13,71 @@ import {
   UpdateUserInput,
   UpdateUserPasswordInput,
 } from '../schema/user.schema';
+import AppError from '../utils/error';
 
 export const createUserHandler = async (
   req: Request<{}, {}, CreateUserInput['body']>,
-  res: Response
+  res: Response,
+  next: NextFunction
 ) => {
   try {
-    const user = omit((await createUser(req.body)).toJSON(), 'password');
-    // return res.send(user)
+    const user = await createUser(req.body);
+
     return res.status(201).json({
-      status: 'sucess',
-      data: {
-        user,
-      },
+      status: 'success',
+      user,
     });
   } catch (err: any) {
-    logger.error(err);
-    // return res.status(409).send(err.message);
-    // 409 means conflict, violated unique restriction
-    return res.status(409).json({
-      status: 'error',
-      error: err.message,
-    });
+    return next(err);
   }
 };
 
 export const getUserHandler = async (
   req: Request<GetUserInput['params']>,
-  res: Response
+  res: Response,
+  next: NextFunction
 ) => {
-  const { userId } = req.params;
-  const user = await findUser({ _id: userId });
+  try {
+    const { userId } = req.params;
+    const user = await findUser({ _id: userId });
+    if (!user) return next(new AppError('No user found.', 404));
 
-  if (!user) return res.sendStatus(404);
-
-  return res.send(user);
+    return res.status(200).json({
+      status: 'success',
+      user,
+    });
+  } catch (err: any) {
+    return next(err);
+  }
 };
 
 export const updateUserHandler = async (
   req: Request<UpdateUserInput['params'], {}, UpdateUserInput['body']>,
-  res: Response
+  res: Response,
+  next: NextFunction
 ) => {
-  const { userId } = req.params;
-  const update = req.body;
+  try {
+    const { userId } = req.params;
+    const update = req.body;
 
-  const user = await updateUser({ _id: userId }, update, { new: true });
-  if (!user) return res.sendStatus(404);
-  if (String(user._id) !== userId) return res.sendStatus(403);
+    const user = await updateUser({ _id: userId }, update, {
+      new: true,
+    });
 
-  return res.send(omit(user.toJSON(), 'password'));
+    if (!user) return next(new AppError('No user found.', 404));
+
+    if (String(user._id) !== userId)
+      return next(
+        new AppError('You are not authorized to perform this action.', 403)
+      );
+
+    return res.status(200).json({
+      status: 'success',
+      updatedUser: user,
+    });
+  } catch (err: any) {
+    return next(err);
+  }
 };
 
 export const updateUserPasswordHandler = async (
@@ -72,25 +86,44 @@ export const updateUserPasswordHandler = async (
     {},
     UpdateUserPasswordInput['body']
   >,
-  res: Response
+  res: Response,
+  next: NextFunction
 ) => {
-  const { userId } = req.params;
-  const updatePassword = req.body;
+  try {
+    const { userId } = req.params;
+    const updatePassword = req.body;
 
-  const newPassword = await updateUserPassword(userId, updatePassword);
+    await updateUserPassword(userId, updatePassword);
 
-  return res.send(omit(newPassword.toJSON(), 'password'));
+    return res.status(200).json({
+      status: 'success',
+      message: 'Password successfully updated',
+    });
+  } catch (err: any) {
+    return next(err);
+  }
 };
 
 export const deleteUserHandler = async (
   req: Request<DeleteUserInput['params']>,
-  res: Response
+  res: Response,
+  next: NextFunction
 ) => {
-  const { userId } = req.params;
-  const user = await deleteUser({ _id: userId });
+  try {
+    const { userId } = req.params;
+    const user = await deleteUser({ _id: userId });
 
-  if (!user) return res.sendStatus(404);
-  if (String(user._id) !== userId) return res.sendStatus(403);
+    if (!user) return next(new AppError('No user found.', 404));
 
-  return res.sendStatus(200);
+    if (String(user._id) !== userId)
+      return next(
+        new AppError('You are not authorized to perform this action.', 403)
+      );
+
+    return res.status(200).json({
+      status: 'success',
+    });
+  } catch (err: any) {
+    return next(err);
+  }
 };

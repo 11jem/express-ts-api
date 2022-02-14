@@ -15,98 +15,141 @@ import {
 } from '../service/product.service';
 import AppError from '../utils/error';
 
-export const getBestBudgetHandler = async (req: Request, res: Response) => {
-  const budgetProducts = await getBudgetProducts();
-  if (!budgetProducts) return res.sendStatus(404);
+export const getBestBudgetHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const budgetProducts = await getBudgetProducts();
+    if (!budgetProducts)
+      return next(new AppError('Page could not be found.', 404));
 
-  return res.send(budgetProducts);
+    return res.status(200).json({
+      status: 'sucess',
+      budgetProducts,
+    });
+  } catch (err: any) {
+    return next(err);
+  }
 };
 
-export const getAllProductsHandler = async (req: Request, res: Response) => {
-  const allProducts = await getAllProducts();
+export const getAllProductsHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const allProducts = await getAllProducts();
+    if (!allProducts)
+      return next(
+        new AppError('There are no products in this collection.', 404)
+      );
 
-  return res.send(allProducts);
+    return res.status(200).json({
+      status: 'success',
+      results: allProducts.length,
+      products: allProducts,
+    });
+  } catch (err: any) {
+    return next(err);
+  }
 };
-
-// trying error handling
-// export const getProductHandler = async (
-//   req: Request<GetProductInput['params'], {}>,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   try {
-//     const { productId } = req.params;
-//     // const product = await getProduct({ productId });
-//     const product = await getProduct(next, { _id: 52893648796527834 });
-
-//     // if (!product) return res.sendStatus(404);
-//     if (!product) return next(new AppError('no product', 404));
-
-//     return res.send(product);
-//   } catch (err) {
-//     return next(err);
-//   }
-// };
 
 export const getProductHandler = async (
   req: Request<GetProductInput['params'], {}>,
   res: Response,
   next: NextFunction
 ) => {
-  const { productId } = req.params;
-  const product = await getProduct({ productId });
+  try {
+    const { productId } = req.params;
+    const product = await getProduct({ productId });
+    if (!product) return next(new AppError('Product does not exist.', 404));
 
-  if (!product) return res.sendStatus(404);
-
-  return res.send(product);
+    return res.status(200).json({
+      status: 'success',
+      product,
+    });
+  } catch (err: any) {
+    return next(err);
+  }
 };
 
 export const createProductHandler = async (
   req: Request<{}, {}, CreateProductInput['body']>,
-  res: Response
+  res: Response,
+  next: NextFunction
 ) => {
-  const { _id: userId } = res.locals.user;
-  const body = req.body;
-  const product = await createProduct({ ...body, user: userId });
+  try {
+    const { _id: userId } = res.locals.user;
+    const body = req.body;
+    const product = await createProduct({ ...body, user: userId });
 
-  return res.send(product);
+    return res.status(201).json({
+      status: 'success',
+      product,
+    });
+  } catch (err: any) {
+    return next(err);
+  }
 };
 
 export const updateProductHandler = async (
   req: Request<UpdateProductInput['params'], {}, UpdateProductInput['body']>,
-  res: Response
+  res: Response,
+  next: NextFunction
 ) => {
-  const { _id: userId } = res.locals.user;
-  const { productId } = req.params;
-  const update = req.body;
+  try {
+    const { _id: userId } = res.locals.user;
+    const { productId } = req.params;
+    const update = req.body;
 
-  const product = await getProduct({ productId });
+    const product = await getProduct({ productId });
 
-  if (!product) return res.sendStatus(404);
+    if (!product) return next(new AppError('Product does not exist.', 404));
 
-  if (String(product.user) !== userId) return res.sendStatus(403);
+    if (String(product.user) !== userId)
+      return next(
+        new AppError('You are not authorized to update this product!', 403)
+      );
 
-  const updatedProduct = await updateProduct({ productId }, update, {
-    new: true,
-  });
+    const updatedProduct = await updateProduct({ productId }, update, {
+      new: true,
+    });
 
-  return res.send(updatedProduct);
+    return res.status(200).json({
+      status: 'success',
+      updatedProduct,
+    });
+  } catch (err: any) {
+    return next(err);
+  }
 };
 
 export const deleteProductHandler = async (
   req: Request<DeleteProductInput['params']>,
-  res: Response
+  res: Response,
+  next: NextFunction
 ) => {
-  const { _id: userId } = res.locals.user;
-  const { productId } = req.params;
+  try {
+    const { _id: userId } = res.locals.user;
+    const { productId } = req.params;
 
-  const product = await getProduct({ productId });
+    const product = await getProduct({ productId });
 
-  if (!product) return res.sendStatus(404);
+    if (!product) return next(new AppError('Product does not exist.', 404));
 
-  if (String(product.user) !== userId) return res.sendStatus(403);
+    if (String(product.user) !== userId)
+      return next(
+        new AppError('You are not authorized to delete this product!', 403)
+      );
 
-  await deleteProduct({ productId });
+    await deleteProduct({ productId });
 
-  return res.sendStatus(200);
+    return res.status(200).json({
+      status: 'success',
+    });
+  } catch (err: any) {
+    return next(err);
+  }
 };

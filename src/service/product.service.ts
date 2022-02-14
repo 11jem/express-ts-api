@@ -19,19 +19,6 @@ export const getAllProducts = async () => {
   return await Product.find();
 };
 
-// trying error handling
-// export const getProduct = async (
-//   next: NextFunction,
-//   query: FilterQuery<ProductDocument>,
-//   options: QueryOptions = { lean: true }
-// ) => {
-//   try {
-//     return await Product.findOne(query, {}, options);
-//   } catch (err) {
-//     return next(new AppError('no product!', 404));
-//   }
-// };
-
 export const getProduct = async (
   query: FilterQuery<ProductDocument>,
   options: QueryOptions = { lean: true }
