@@ -3,7 +3,6 @@
 import { FilterQuery, QueryOptions, UpdateQuery } from 'mongoose';
 import { omit } from 'lodash';
 import User, { UserDocument, UserInput } from '../models/user.models';
-import { NextFunction } from 'express';
 import AppError from '../utils/error';
 
 export const createUser = async (input: UserInput) => {

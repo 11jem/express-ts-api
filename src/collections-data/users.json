@@ -1,0 +1,68 @@
+[
+  {
+    "email": "test@example.com",
+    "name": "Jane Doe",
+    "password": "test1234",
+    "passwordConfirm": "test1234"
+  },
+  {
+    "email": "john@example.com",
+    "name": "John",
+    "password": "test1234",
+    "passwordConfirm": "test1234"
+  },
+  {
+    "email": "kim@example.com",
+    "name": "Kim",
+    "password": "test1234",
+    "passwordConfirm": "test1234"
+  },
+  {
+    "email": "jennie@example.com",
+    "name": "Jennie",
+    "password": "test1234",
+    "passwordConfirm": "test1234"
+  },
+  {
+    "email": "anna@example.com",
+    "name": "Anna",
+    "password": "test1234",
+    "passwordConfirm": "test1234"
+  },
+  {
+    "email": "paul@example.com",
+    "name": "Paul",
+    "password": "test1234",
+    "passwordConfirm": "test1234"
+  },
+  {
+    "email": "bob@example.com",
+    "name": "Bob",
+    "password": "test1234",
+    "passwordConfirm": "test1234"
+  },
+  {
+    "email": "mike@example.com",
+    "name": "Mike",
+    "password": "test1234",
+    "passwordConfirm": "test1234"
+  },
+  {
+    "email": "pam@example.com",
+    "name": "Pam",
+    "password": "test1234",
+    "passwordConfirm": "test1234"
+  },
+  {
+    "email": "claire@example.com",
+    "name": "Claire",
+    "password": "test1234",
+    "passwordConfirm": "test1234"
+  },
+  {
+    "email": "mitch@example.com",
+    "name": "Mitch",
+    "password": "test1234",
+    "passwordConfirm": "test1234"
+  }
+]

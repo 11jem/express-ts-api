@@ -110,7 +110,7 @@ export const updateProductHandler = async (
 
     if (String(product.user) !== userId)
       return next(
-        new AppError('You are not authorized to update this product!', 403)
+        new AppError('You are not authorized to update this product!', 401)
       );
 
     const updatedProduct = await updateProduct({ productId }, update, {

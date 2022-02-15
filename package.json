@@ -21,13 +21,16 @@
   },
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "importData": "ts-node ./src/collections-data/import-data.ts --import",
+    "deleteData": "ts-node ./src/collections-data/import-data.ts --delete"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
     "config": "^3.3.7",
     "cors": "^2.8.5",
     "dayjs": "^1.10.7",
+    "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",

@@ -68,7 +68,7 @@ export const updateUserHandler = async (
 
     if (String(user._id) !== userId)
       return next(
-        new AppError('You are not authorized to perform this action.', 403)
+        new AppError('You are not authorized to perform this action.', 401)
       );
 
     return res.status(200).json({

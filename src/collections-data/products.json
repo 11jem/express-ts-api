@@ -1,0 +1,79 @@
+[
+  {
+    "user": "6205abf2d2132f2e647853c4",
+    "title": "Canon EOS 1500D DSLR Camera with 18-55mm Lens",
+    "description": "Designed for first-time DSLR owners who want impressive results straight out of the box, capture those magic moments no matter your level with the EOS 1500D. With easy to use automatic shooting modes, large 24.1 MP sensor, Canon Camera Connect app integration and built-in feature guide, EOS 1500D is always ready to go.",
+    "price": 879.99,
+    "image": "https://i.imgur.com/QlRphfQ.jpg"
+  },
+  {
+    "user": "620768fb1f26483c72e3454e",
+    "title": "Canon EOS 1500D DSLR Camera with 18-55mm Lens",
+    "description": "Designed for first-time DSLR owners who want impressive results straight out of the box, capture those magic moments no matter your level with the EOS 1500D. With easy to use automatic shooting modes, large 24.1 MP sensor, Canon Camera Connect app integration and built-in feature guide, EOS 1500D is always ready to go.",
+    "price": 699.99,
+    "image": "https://i.imgur.com/QlRphfQ.jpg"
+  },
+  {
+    "user": "620768fb1f26483c72e3454e",
+    "title": "Sony a7 III",
+    "description": "The Sony a7 III is an entry-level full-frame camera that goes well beyond the basics in features, with excellent image quality, 10fps subject tracking, and 4K video capture.",
+    "price": 1998,
+    "image": "https://i.pcmag.com/imagery/reviews/04WZ7XCJvjrrlvI3ilFI2n9-39.fit_lim.size_238x139.v1569480996.jpg"
+  },
+  {
+    "user": "620768fb1f26483c72e3454e",
+    "title": "Sony a6400",
+    "description": "The Sony a6400 is a camera that straddles the line between consumer and enthusiast, delivering automatic operation for family snapshots with the image quality and speed aficionados love. ",
+    "price": 1099,
+    "image": "https://i.pcmag.com/imagery/reviews/02wofcU5rs6hnZxrKm33Fdw-40.fit_lim.size_238x139.v1569480935.jpg"
+  },
+  {
+    "user": "620768fb1f26483c72e3454e",
+    "title": "Panasonic Lumix DC-S5",
+    "description": "The Panasonic Lumix DC-S5 is a slimmer, more affordable full-frame camera, with loads of appeal for photographers shopping for an entry-level or midrange model.  ",
+    "price": 1897.99,
+    "image": "https://i.pcmag.com/imagery/reviews/02OkXj6AAv6hCKiLd35dYxw-1.fit_lim.size_238x139.v1604591717.jpg"
+  },
+  {
+    "user": "620768fb1f26483c72e3454e",
+    "title": "Fujifilm X-S10",
+    "description": "The Fujifilm X-S10 puts a proven image sensor into a camera body with a big grip that's better for telephoto lenses, and in-body stabilization for blur-free photos and video. ",
+    "price": 999,
+    "image": "https://i.pcmag.com/imagery/reviews/002vbma6fsslqlXeucyClIC-1.fit_lim.size_238x139.v1620848995.jpg"
+  },
+  {
+    "user": "620768fb1f26483c72e3454e",
+    "title": "Canon PowerShot SX70 HS",
+    "description": "The Canon PowerShot SX70 HS captures views ranging from ultra-wide to extreme telephoto. It's a solid camera for wildlife observers, families, and shutterbugs in search of a lightweight bridge model. ",
+    "price": 699,
+    "image": "https://i.pcmag.com/imagery/reviews/03lo9RsLzRw3txoeExNaEHW-38.fit_lim.size_238x139.v1574731241.jpg"
+  },
+  {
+    "user": "620768fb1f26483c72e3454e",
+    "title": "Olympus Tough TG-6",
+    "description": "The Olympus Tough TG-6 is a modest update to our favorite underwater point-and-shoot camera thanks to its tough design, bright lens, and excellent macro capabilities.  ",
+    "price": 499,
+    "image": "https://i.pcmag.com/imagery/reviews/030QwkhvP99t0ALq4GE6t4n-31.fit_lim.size_238x139.v1570122705.jpg"
+  },
+  {
+    "user": "620768fb1f26483c72e3454e",
+    "title": "Sony Cyber-shot DSC-RX100 VII",
+    "description": "The Sony Cyber-shot DSC-RX100 VII point-and-shoot is a modest update to the RX100 VI, offering better autofocus and video stabilization for a bit more money. ",
+    "price": 1298,
+    "image": "https://i.pcmag.com/imagery/reviews/07BvaqqmGDjfB8gi9dXYv9d-22.fit_lim.size_238x139.v1578588322.jpg"
+  },
+  {
+    "user": "620768fb1f26483c72e3454e",
+    "title": "Canon EOS R6",
+    "description": "The EOS R6 is Canon's best mirrorless camera, with a stabilized, full-frame image sensor and an outstanding autofocus system, but video-first creatives will want to look elsewhere. ",
+    "price": 2799,
+    "image": "https://i.pcmag.com/imagery/reviews/05oDWS6cGc0WVJM2rvEcjOv-1.fit_lim.size_238x139.v1600807382.jpg"
+  },
+  {
+    "user": "620768fb1f26483c72e3454e",
+    "title": "Sony ZV-1",
+    "description": "The Sony ZV-1 is a pocketable camera with strong still image quality and features geared specifically toward vloggers. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ",
+    "price": 749.99,
+    "image": "https://i.pcmag.com/imagery/reviews/05bltoeNph7qnCxFlRO8r3G-1.fit_lim.size_238x139.v1595602213.jpg"
+  }
+]

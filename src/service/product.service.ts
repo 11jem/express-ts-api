@@ -1,12 +1,10 @@
 // Everything related to DB calls
 
-import { NextFunction } from 'express';
 import { FilterQuery, QueryOptions, UpdateQuery } from 'mongoose';
 import Product, {
   ProductDocument,
   ProductInput,
 } from '../models/product.model';
-import AppError from '../utils/error';
 
 export const getBudgetProducts = async () => {
   return await Product.find()
