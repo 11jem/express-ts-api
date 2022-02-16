@@ -32,7 +32,7 @@ Requests that go through the requireUser middleware need to create a session fir
 
 ## Added Features
 
-These are some of the features that I added to the original API.
+These are some of the features that I added to the original API:
 
 - GET user
 - UPDATE user info
